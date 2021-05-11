@@ -1,134 +1,165 @@
 {
-    "inbounds": [
-        {
-            "port": 1234,
-            "listen": "0.0.0.0",
-            "protocol": "dokodemo-door",
-            "settings": {
-                "network": "tcp",
-                "followRedirect": true
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls"
-                ]
-            }
-        }
-    ],
-    "outbounds": [
-        {
-            "protocol": "freedom",
-            "tag": "direct"
-        },
-        {
-            "protocol": "blackhole",
-            "tag": "block"
-        },
-        {
-            "protocol": "vmess",
-            "tag": "proxy",
-            "settings": {
-                "vnext": [
-                    {
-                        "address": "45.79.226.214",
-                        "port": 443,
-                        "users": [
-                            {
-                                "id": "418048af-a293-4b99-9b0c-98ca3580dd23",
-                                "security": "none"
-                            }
-                        ]
-                    },
-                    {
-                        "address": "154.84.1.249",
-                        "port": 443,
-                        "users": [
-                            {
-                                "id": "418048af-a293-4b99-9b0c-98ca3580dd23",
-                                "security": "none"
-                            }
-                        ]
-                    },					
-                    {
-                        "address": "64.32.31.234",
-                        "port": 443,
-                        "users": [
-                            {
-                                "id": "418048af-a293-4b99-9b0c-98ca3580dd23",
-                                "security": "none"
-                            }
-                        ]
-                    },					
-                    {
-                        "address": "45.79.112.91",
-                        "port": 443,
-                        "users": [
-                            {
-                                "id": "418048af-a293-4b99-9b0c-98ca3580dd23",
-                                "security": "none"
-                            }
-                        ]
-                    }					
-                ]
-            },
-            "streamSettings": {
-                "network": "ws",
-                "security": "tls",
-                "tlsSettings": {
-                    "allowInsecure": true,
-                    "serverName": "www.hachrly.live"
-                },
-                "wsSettings": {
-                    "path": "/footers",
-                    "headers": {
-                        "Host": "www.hachrly.live"
-                    }
-                }
-            },
-            "mux": {
-                "enabled": true
-            }
-        }
-    ],
-    "routing": {
-        "rules": [
-            {
-                "domain": ["ext:h2y.dat:ad"],
-                "type": "field",
-                "outboundTag": "block"
-            },            
-            {
-                "type": "field",
-                "outboundTag": "proxy",
-                "domain": [
-                    "ext:h2y.dat:gfw",
-                    "domain:google.com.hk",
-                    "domain:github.com"
-                ]
-            },
-            {
-                "type": "field",
-                "outboundTag": "proxy",//FOR-TELEGRAM
-                    "ip": [
-                    "91.108.12.0/22",
-                    "149.154.172.0/22",
-                    "91.108.16.0/22",
-                    "91.108.56.0/23",
-                    "149.154.168.0/22",
-                    "91.108.4.0/22",
-                    "91.108.8.0/22",
-                    "91.108.56.0/22",
-                    "149.154.160.0/20",
-                    "149.154.164.0/22"
-                ]
-            },
-            {
-                "type": "field",
-                "network": "tcp,udp",
-                "outboundTag": "direct"
-            }
+  "dns": {
+    "hosts": {
+      "dns.google": "8.8.8.8",
+      "dns.pub": "119.29.29.29",
+      "dns.alidns.com": "223.5.5.5",
+      "geosite:category-ads-all": "127.0.0.1"
+    },
+    "servers": [
+      {
+        "address": "https://1.1.1.1/dns-query",
+        "domains": [
+          "geosite:geolocation-!cn"
+        ],
+        "expectIPs": [
+          "geoip:!cn"
         ]
+      },
+      "8.8.8.8",
+      {
+        "address": "114.114.114.114",
+        "port": 53,
+        "domains": [
+          "geosite:cn",
+          "geosite:category-games@cn"
+        ],
+        "expectIPs": [
+          "geoip:cn"
+        ],
+        "skipFallback": true
+      },
+      {
+        "address": "localhost",
+        "skipFallback": true
+      }
+    ]
+  },
+  "inbounds": [
+    {
+      "port": 1080,
+      "listen": "0.0.0.0",
+      "protocol": "socks",
+      "settings": {
+        "auth": "noauth",
+        "udp": true,
+        "ip": "127.0.0.1"
+      },
+      "tag": "in-0",
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
+      }
+    },
+    {
+      "port": "1081",
+      "protocol": "http",
+      "settings": {},
+      "tag": "in-1"
+    },
+    {
+      "port": 1234,
+      "listen": "0.0.0.0",
+      "protocol": "dokodemo-door",
+      "settings": {
+        "network": "tcp",
+        "followRedirect": true
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
+      }
     }
+  ],
+  "outbounds": [
+    {
+      "protocol": "vmess",
+      "tag": "proxy",
+      "settings": {
+        "vnext": [
+          {
+            "address": "your.domain.name",
+            "port": 443,
+            "users": [
+              {
+                "id": "your-uuid",
+                "alterId": 2
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "wsSettings": {
+          "path": "/path",
+          "headers": {}
+        },
+        "tlsSettings": {
+          "serverName": "your.domain.name"
+        }
+      },
+      "mux": {
+        "enabled": true
+      }
+    },
+    {
+      "tag": "direct",
+      "protocol": "freedom",
+      "settings": {}
+    },
+    {
+      "tag": "blocked",
+      "protocol": "blackhole",
+      "settings": {}
+    }
+  ],
+  "routing": {
+    "rules": [
+      {
+        "type": "field",
+        "outboundTag": "reject",
+        "domain": [
+          "geosite:category-ads-all"
+        ]
+      },
+      {
+        "type": "field",
+        "outboundTag": "direct",
+        "domain": [
+          "geosite:private",
+          "geosite:apple-cn",
+          "geosite:google-cn",
+          "geosite:tld-cn",
+          "geosite:category-games@cn"
+        ]
+      },
+      {
+        "type": "field",
+        "outboundTag": "proxy",
+        "domain": [
+          "geosite:geolocation-!cn"
+        ]
+      },
+      {
+        "type": "field",
+        "outboundTag": "direct",
+        "domain": [
+          "geosite:cn"
+        ]
+      },
+      {
+        "type": "field",
+        "outboundTag": "proxy",
+        "network": "tcp,udp"
+      }
+    ]
+  }
 }

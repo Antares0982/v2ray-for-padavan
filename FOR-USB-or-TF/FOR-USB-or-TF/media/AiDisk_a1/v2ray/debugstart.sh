@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #echo "Load modprobe"
 modprobe ip_set_hash_net
 modprobe xt_set
@@ -13,8 +13,8 @@ iptables -t nat -D OUTPUT V2RAY  >/dev/null 2>&1
 /bin/iptables -t nat -X V2RAY >/dev/null 2>&1
 /sbin/ipset destroy chnroute >/dev/null 2>&1
 #echo "ipset chnroute"
-#ipset -exist create chnroute hash:net hashsize 64
-#sed -e "s/^/add chnroute /" /media/AIDISK/v2ray/chnroute.txt | ipset restore
+ipset -exist create chnroute hash:net hashsize 64
+sed -e "s/^/add chnroute /" /media/AIDISK/v2ray/chnroute.txt | ipset restore
 echo ""
 echo ""
 echo "[setting iptables]"
@@ -62,7 +62,4 @@ echo ""
 
 cd /media/AIDISK/v2ray
 
-SSL_CERT_FILE=./cacert.pem ./v2ray --config=/media/AIDISK/v2ray/config.json >/dev/null 2>&1 &
-echo "[V2ray start]"
-#./v2ray-watchdog >/dev/null 2>&1 &
-#echo "[v2ray-watchdog started]."
+SSL_CERT_FILE=./cacert.pem ./v2ray --config=/media/AIDISK/v2ray/config.json
