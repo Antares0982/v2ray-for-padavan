@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 iptables -t nat -D PREROUTING V2RAY  >/dev/null 2>&1
 iptables -t nat -D OUTPUT V2RAY  >/dev/null 2>&1
 /bin/iptables -t nat -F V2RAY >/dev/null 2>&1

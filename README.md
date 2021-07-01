@@ -1,3 +1,5 @@
+**该fork如何使用可以参考[这里](https://chr.fan/padavan-v2ray/)**
+
 支持MT7620/7621; 
 <br>
 实测K1/K2/优酷路由宝/K2P/NEWIFI3正常运行
@@ -11,18 +13,18 @@
 * 执行 `sh /media/AiDisk_a1/v2ray/start.sh` 启动
 
 <br>
- 
+
 * ALL DONE . Just Go surfing !  
 
 <br>
- 
+
 * 自启动：在自定义设置-脚本-'在防火墙规则启动后执行下'粘贴
     * `sleep 10 && sh /media/AiDisk_a1/v2ray/start.sh`
-    
+
 <br>
- 
+
 <br>
-  
+
 ## 主文件除了放USB外部储存，还可以放在TMP、[STORAGE空间](https://www.right.com.cn/forum/thread-714749-1-1.html)或[trx固件封包](https://www.right.com.cn/forum/thread-747762-1-1.html)
 
 
@@ -33,9 +35,9 @@
     * 请下载'FOR-封装.zip'并看里面<指引>
 
  <br>
-  
+
  <br>
- 
+
 -------------
 ## Thanks:
 感谢以下的项目,排名不分先后
