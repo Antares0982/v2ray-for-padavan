@@ -1,3 +1,7 @@
+### 2022年2月13日更新：
+
+目前部分服务端已经不支持之前版本的v2ray客户端。现改用xray内核，有需要可以自行选用新版本v2ray，在[release页面](https://github.com/v2ray/v2ray-core/releases)下载mips32le版本即可。
+
 **该fork如何使用可以参考[这里](https://chr.fan/padavan-v2ray/)**
 
 支持MT7620/7621; 
